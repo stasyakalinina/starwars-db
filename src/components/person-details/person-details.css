@@ -21,3 +21,10 @@
 .person-details .list-group-item .term {
   margin-right: .5rem;
 }
+
+@media(max-width: 844px) {
+  .person-details {
+    width: 100%;
+    margin: 1rem 0;
+  }
+}

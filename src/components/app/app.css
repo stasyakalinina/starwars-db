@@ -1,3 +1,9 @@
 .app-people {
   display: flex;
 }
+
+@media(max-width: 844px) {
+  .app-people {
+    flex-wrap: wrap;
+  }
+}

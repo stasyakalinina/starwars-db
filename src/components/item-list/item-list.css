@@ -3,3 +3,10 @@
   margin-top: 1rem;
   margin-right: 15px;
 }
+
+@media(max-width: 844px) {
+  .item-list {
+    width: 100%;
+    margin: 1rem 0;
+  }
+}

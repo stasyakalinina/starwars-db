@@ -32,3 +32,23 @@
 .random-planet__item .term {
   margin-right: .5rem;
 }
+
+@media(max-width: 844px) {
+  .random-planet {
+    margin-bottom: 1rem;
+  }
+}
+
+@media(max-width: 440px) {
+  .random-planet {
+    display: block;
+  }
+
+  .random-planet__img {
+    margin: 0 0 10px;
+  }
+
+  .random-planet__list {
+    margin: 0;
+  }
+}
