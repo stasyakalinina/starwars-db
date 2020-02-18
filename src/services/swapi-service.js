@@ -12,39 +12,81 @@ export default class SwapiService {
 
   async getAllPeople() {
     let res = await this.getResourse(`/people/`);
-    return res.results;
+    return res.results.map(this._transformPerson);
   }
 
-  getPerson(id) {
-    return this.getResourse(`/people/${id}`);
+  async getPerson(id) {
+    const person = await this.getResourse(`/people/${id}`);
+    return this._transformPerson(person);
   }
 
   async getAllPlanets() {
     let res = await this.getResourse(`/planets/`);
-    return res.results;
+    return res.results.map(this._transformPlanet);
   }
 
-  getPlanet(id) {
-    return this.getResourse(`/planets/${id}`);
+  async getPlanet(id) {
+    const planet = await this.getResourse(`/planets/${id}`);
+    return this._transformPlanet(planet);
   }
 
   async getAllStarhips() {
     let res = await this.getResourse(`/starships/`);
-    return res.results;
+    return res.results.map(this._transformStarship);
   }
 
-  getStarship(id) {
-    return this.getResourse(`/starships/${id}`);
+  async getStarship(id) {
+    const starship = await this.getResourse(`/starships/${id}`);
+    return this._transformStarship(starship);
+  }
+
+  _extractID(item) {
+    const idRegExp = /\/([0-9]*)\/$/;
+    return item.url.match(idRegExp)[1];
+  }
+
+  _transformPlanet(planet) {
+    return {
+      id: this._extractID(planet),
+      name: planet.name,
+      population: planet.population,
+      rotationPeriod: planet.rotation_period,
+      diameter: planet.diameter,
+    }
+  }
+
+  _transformPerson(person) {
+    return {
+      id: this._extractID(person),
+      name: person.name,
+      gender: person.gender,
+      birthYear: person.birth_year,
+      eyeColor: person.eye_color,
+    }
+  }
+
+  _transformStarship(starship) {
+    return {
+      id: this._extractID(starship),
+      name: starship.name,
+      model: starship.model,
+      manufacturer: starship.manufacturer,
+      costInCredits: starship.cost_in_credits,
+      length: starship.length,
+      crew: starship.crew,
+      passengers: starship.passengers,
+      cargoCapacity: starship.cargo_capacity,
+    }
   }
 }
 
-const swapi = new SwapiService();
+// const swapi = new SwapiService();
 // swapi.getAllPeople().then((body) => {
 //   body.forEach((item) => {
 //     console.log(item.name);
 //   });
 // });
 
-swapi.getPerson(3).then((body) => {
-  console.log(body.name);
-});
+// swapi.getPerson(3).then((body) => {
+//   console.log(body.name);
+// });
