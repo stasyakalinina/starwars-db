@@ -1,0 +1,16 @@
+.error {
+  width: 80%;
+  margin: 0 auto;
+  color: #c78f22;
+  text-align: center;
+}
+
+.error h3 {
+  margin-top: 15px;
+  font-size: 1.2rem;
+  text-transform: uppercase;
+}
+
+.error p {
+  margin: 0;
+}
