@@ -79,14 +79,3 @@ export default class SwapiService {
     }
   }
 }
-
-// const swapi = new SwapiService();
-// swapi.getAllPeople().then((body) => {
-//   body.forEach((item) => {
-//     console.log(item.name);
-//   });
-// });
-
-// swapi.getPerson(3).then((body) => {
-//   console.log(body.name);
-// });
