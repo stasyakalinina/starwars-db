@@ -44,13 +44,13 @@ export default class RandomPlanet extends Component {
   render() {
     const { planet, loading, error } = this.state;
     const hasData = !(loading || error);
-    const ErrorMessage = error ? <ErrorIndicator /> : null;
+    const errorMessage = error ? <ErrorIndicator /> : null;
     const spinner = loading ? <Loader /> : null;
     const content = hasData ? <PlanetView planet={planet} /> : null;
 
     return (
       <article className="random-planet jumbotron rounded">
-        {ErrorMessage}
+        {errorMessage}
         {spinner}
         {content}
       </article>

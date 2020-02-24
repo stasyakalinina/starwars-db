@@ -1,5 +1,6 @@
 .person-details {
   display: flex;
+  flex-wrap: wrap;
   margin-top: 1rem;
   margin-left: 15px;
   flex-direction: row;
@@ -20,6 +21,11 @@
 
 .person-details .list-group-item .term {
   margin-right: .5rem;
+}
+
+.person-details__message {
+  width: 100%;
+  text-align: center;
 }
 
 @media(max-width: 844px) {
