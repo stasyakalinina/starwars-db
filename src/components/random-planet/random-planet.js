@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import SwapiService from '../../services/swapi-service';
 import Loader from '../loader/loader';
 import ErrorIndicator from '../error-indicator/error-indicator';
+import ErrorButton from '../error-button/error-button';
+
 import './random-planet.css';
 
 export default class RandomPlanet extends Component {
@@ -87,6 +89,9 @@ const PlanetView = (props) => {
             <span>{diameter}</span>
           </li>
         </ul>
+      </div>
+      <div className="random-planet__btns">
+          <ErrorButton />
       </div>
     </React.Fragment>
   );

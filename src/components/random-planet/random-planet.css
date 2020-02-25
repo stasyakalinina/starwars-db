@@ -1,5 +1,6 @@
 .random-planet {
   display: flex;
+  flex-wrap: wrap;
   padding: 1rem;
 }
 
@@ -31,6 +32,10 @@
 
 .random-planet__item .term {
   margin-right: .5rem;
+}
+
+.random-planet__btns {
+  width: 100%;
 }
 
 @media(max-width: 844px) {
