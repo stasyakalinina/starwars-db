@@ -28,6 +28,10 @@
   text-align: center;
 }
 
+.card__btn {
+  width: 100%;
+}
+
 @media(max-width: 844px) {
   .person-details {
     width: 100%;

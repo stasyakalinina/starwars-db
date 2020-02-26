@@ -1,15 +1,19 @@
 import React, {Component} from 'react';
+import SwapiService from "../../services/swapi-service";
 import ItemList from '../item-list/item-list';
 import PersonDetails from '../person-details/person-details';
 import ErrorIndicator from '../error-indicator/error-indicator';
+import RowSection from '../row-section/row-section';
 
 import './people-page.css';
 
 export default class PeoplePage extends Component {
 
+  swapiService = new SwapiService();
+
   state = {
-    selectedPerson: null,
-    hasError: false,
+    selectedPerson: 3,
+    hasError: false
   };
 
   onPersonSelected = (id) => {
@@ -30,11 +34,20 @@ export default class PeoplePage extends Component {
       return <ErrorIndicator />
     }
 
-    return (
-      <section className="app-people">
-        <ItemList onItemSelected={this.onPersonSelected}/>
-        <PersonDetails personId={this.state.selectedPerson}/>
-      </section>
+    const itemList = (
+      <ItemList
+          onItemSelected={this.onPersonSelected}
+          getData={this.swapiService.getAllPeople}
+          renderItem={(item) => `${item.name} (${item.gender}, ${item.birthYear})`}
+        />
     );
+
+    const personDetails = (
+      <PersonDetails personId={this.state.selectedPerson}/>
+    )
+
+    return (
+      <RowSection leftBlock={itemList} rightBlock={personDetails}/>
+    )
   }
-}
+};

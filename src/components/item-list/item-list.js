@@ -6,43 +6,47 @@ import './item-list.css';
 
 export default class ItemList extends Component {
 
-  swapiService = new SwapiService();
-
   state = {
-    peopleList: null,
+    itemList: null,
   };
 
   componentDidMount() {
-    this.swapiService
-      .getAllPeople()
-      .then((people) => {
+    const { getData } = this.props;
+
+    getData()
+      .then((items) => {
         this.setState({
-          peopleList: people,
+          itemList: items,
         });
+      })
+      .catch((err) => {
+        console.log(err);
       });
   }
 
   renderItems(arr) {
-    return arr.map((person) => {
+    return arr.map((item) => {
+
+      const label = this.props.renderItem(item);
       return (
         <li
           className="list-group-item"
-          key={person.id}
-          onClick={() => this.props.onItemSelected(person.id)}>
-          {person.name}
+          key={item.id}
+          onClick={() => this.props.onItemSelected(item.id)}>
+          {label}
         </li>
       );
     });
   }
 
   render() {
-    const { peopleList } = this.state
+    const { itemList } = this.state
 
-    if (!peopleList) {
+    if (!itemList) {
       return <Loader />
     }
 
-    let items = this.renderItems(peopleList);
+    let items = this.renderItems(itemList);
 
     return (
       <ul className="item-list list-group">

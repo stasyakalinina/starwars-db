@@ -1,0 +1,10 @@
+.row-section {
+  display: flex;
+  align-items: flex-start;
+}
+
+@media(max-width: 844px) {
+  .row-section {
+    flex-wrap: wrap;
+  }
+}

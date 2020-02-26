@@ -1,10 +1,3 @@
-.app-people {
-  display: flex;
-  align-items: flex-start;
-}
-
-@media(max-width: 844px) {
-  .app-people {
-    flex-wrap: wrap;
-  }
+.container {
+  padding-bottom: 1.5rem;
 }

@@ -85,7 +85,9 @@ const PersonView = (props) => {
           </li>
         </ul>
       </div>
-      <ErrorButton />
+      <div className="card__btn">
+        <ErrorButton />
+      </div>
     </React.Fragment>
   );
 };
