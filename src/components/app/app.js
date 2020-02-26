@@ -6,7 +6,8 @@ import RandomPlanet from '../random-planet/random-planet';
 import ErrorIndicator from '../error-indicator/error-indicator';
 import PeoplePage from '../people-page/people-page';
 import ItemList from '../item-list/item-list';
-import PersonDetails from '../person-details/person-details';
+import ItemDetails from '../item-details/item-details';
+import RowSection from '../row-section/row-section';
 
 export default class App extends Component {
 
@@ -24,29 +25,32 @@ export default class App extends Component {
 
   render() {
 
+    const { getPerson, getStarship, getPersonImage, getStarshipImage } = this.swapiService;
+
     if(this.state.hasError) {
       return <ErrorIndicator />
     }
+
+    const personDetails = (
+      <ItemDetails
+        itemId={11}
+        getData={getPerson}
+        getImgUrl={getPersonImage} />
+    );
+
+    const starshipDetails = (
+      <ItemDetails
+        itemId={5}
+        getData={getStarship}
+        getImgUrl={getStarshipImage} />
+    );
 
     return (
       <div className="container">
         <Header />
         <RandomPlanet />
-        <PeoplePage />
-        {/* <section className="app-section">
-          <ItemList
-            onItemSelected={this.onPersonSelected}
-            getData={this.swapiService.getAllPlanets}
-            renderItem={(item) => `${item.name} (${item.diameter})`}/>
-          <PersonDetails personId={this.state.selectedPerson}/>
-        </section>
-        <section className="app-section">
-          <ItemList
-            onItemSelected={this.onPersonSelected}
-            getData={this.swapiService.getAllStarhips}
-            renderItem={(item) => `${item.name} (${item.model})`}/>
-          <PersonDetails personId={this.state.selectedPerson}/>
-        </section> */}
+        {/* <PeoplePage /> */}
+        <RowSection leftBlock={personDetails} rightBlock={starshipDetails} />
       </div>
     );
   };

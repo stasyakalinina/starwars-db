@@ -3,41 +3,42 @@ import SwapiService from '../../services/swapi-service';
 import Loader from '../loader/loader';
 import ErrorButton from '../error-button/error-button';
 
-import './person-details.css';
+import './item-details.css';
 
-export default class PersonDetails extends Component {
+export default class ItemDetails extends Component {
 
   swapiService = new SwapiService();
 
   state = {
-    person: null,
+    item: null,
+    image: null,
     loading: false,
   };
 
   componentDidMount() {
-    this.updatePerson();
+    this.updateItem();
   }
 
   componentDidUpdate(prevProps) {
-    if(this.props.personId !== prevProps.personId) {
+    if(this.props.itemId !== prevProps.itemId) {
       this.setState({
         loading: true,
       });
-      this.updatePerson();
+      this.updateItem();
     }
   }
 
-  updatePerson() {
-    let { personId } = this.props;
-    if (!personId) {
+  updateItem() {
+    const { itemId, getData, getImgUrl } = this.props;
+    if (!itemId) {
       return;
     }
 
-    this.swapiService
-      .getPerson(personId)
-      .then((currentPerson) => {
+    getData(itemId)
+      .then((currentItem) => {
         this.setState({
-          person: currentPerson,
+          item: currentItem,
+          image: getImgUrl(currentItem),
           loading: false,
         });
       })
@@ -45,10 +46,10 @@ export default class PersonDetails extends Component {
 
   render() {
 
-    const { person, loading } = this.state;
-    const message = !this.state.person ? <Message /> : null;
+    const { item, loading, image } = this.state;
+    const message = !this.state.item ? <Message /> : null;
     const spinner = loading ? <Loader /> : null;
-    const content = (!loading && this.state.person)? <PersonView person={person}/> : null;
+    const content = (!loading && this.state.item)? <ItemView item={item} image={image}/> : null;
 
     return (
       <div className="person-details card">
@@ -60,28 +61,29 @@ export default class PersonDetails extends Component {
   }
 };
 
-const PersonView = (props) => {
-  let {id, name, gender, birthYear, eyeColor} = props.person;
+const ItemView = (props) => {
+  let { image, item } = props;
+  console.log(image);
 
   return (
     <React.Fragment>
       <img className="person-image"
-        src={`https://starwars-visualguide.com/assets/img/characters/${id}.jpg`} alt="avatar" />
+        src={image} alt="avatar" />
 
       <div className="card__body">
-        <h4>{name}</h4>
+        <h4>{item.name}</h4>
         <ul className="list-group list-group-flush">
           <li className="list-group-item">
             <span className="term">Gender:</span>
-            <span>{gender}</span>
+            <span>{item.gender}</span>
           </li>
           <li className="list-group-item">
             <span className="term">Birth Year:</span>
-            <span>{birthYear}</span>
+            <span>{item.birthYear}</span>
           </li>
           <li className="list-group-item">
             <span className="term">Eye Color:</span>
-            <span>{eyeColor}</span>
+            <span>{item.eyeColor}</span>
           </li>
         </ul>
       </div>
