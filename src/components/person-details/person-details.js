@@ -66,7 +66,7 @@ const PersonView = (props) => {
   return (
     <React.Fragment>
       <img className="person-image"
-        src={`https://starwars-visualguide.com/assets/img/characters/${id}.jpg`} />
+        src={`https://starwars-visualguide.com/assets/img/characters/${id}.jpg`} alt="avatar" />
 
       <div className="card__body">
         <h4>{name}</h4>
