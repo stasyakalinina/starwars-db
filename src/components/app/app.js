@@ -5,8 +5,7 @@ import Header from '../header/header';
 import RandomPlanet from '../random-planet/random-planet';
 import ErrorIndicator from '../error-indicator/error-indicator';
 import PeoplePage from '../people-page/people-page';
-import ItemList from '../item-list/item-list';
-import ItemDetails from '../item-details/item-details';
+import ItemDetails, {Record} from '../item-details/item-details';
 import RowSection from '../row-section/row-section';
 
 export default class App extends Component {
@@ -35,14 +34,21 @@ export default class App extends Component {
       <ItemDetails
         itemId={11}
         getData={getPerson}
-        getImgUrl={getPersonImage} />
+        getImgUrl={getPersonImage}>
+          <Record field="gender" label="Gender" />
+          <Record field="eyeColor" label="Eye Color" />
+      </ItemDetails>
     );
 
     const starshipDetails = (
       <ItemDetails
         itemId={5}
         getData={getStarship}
-        getImgUrl={getStarshipImage} />
+        getImgUrl={getStarshipImage}>
+          <Record field="model" label="Model" />
+          <Record field="length" label="Lenght" />
+          <Record field="costInCredits" label="Cost" />
+      </ItemDetails>
     );
 
     return (

@@ -45,55 +45,40 @@ export default class ItemDetails extends Component {
   };
 
   render() {
-
-    const { item, loading, image } = this.state;
-    const message = !this.state.item ? <Message /> : null;
-    const spinner = loading ? <Loader /> : null;
-    const content = (!loading && this.state.item)? <ItemView item={item} image={image}/> : null;
+    const { item, image } = this.state;
+    if (!item) {
+      return <p>Select a item from a list</p>;
+    }
 
     return (
       <div className="person-details card">
-        {message}
-        {spinner}
-        {content}
-      </div>
-    )
-  }
-};
-
-const ItemView = (props) => {
-  let { image, item } = props;
-  console.log(image);
-
-  return (
-    <React.Fragment>
-      <img className="person-image"
+        <img className="person-image"
         src={image} alt="avatar" />
-
-      <div className="card__body">
-        <h4>{item.name}</h4>
-        <ul className="list-group list-group-flush">
-          <li className="list-group-item">
-            <span className="term">Gender:</span>
-            <span>{item.gender}</span>
-          </li>
-          <li className="list-group-item">
-            <span className="term">Birth Year:</span>
-            <span>{item.birthYear}</span>
-          </li>
-          <li className="list-group-item">
-            <span className="term">Eye Color:</span>
-            <span>{item.eyeColor}</span>
-          </li>
-        </ul>
-      </div>
+        <div className="card__body">
+          <h4>{item.name}</h4>
+          <ul className="list-group list-group-flush">
+            {
+              React.Children.map(this.props.children, (child, index) => {
+                return React.cloneElement(child, { item });
+              })
+            }
+          </ul>
+        </div>
       <div className="card__btn">
         <ErrorButton />
       </div>
-    </React.Fragment>
+      </div>
+    );
+  }
+}
+
+
+const Record = ({ item, field, label }) => {
+  return (
+    <li className="list-group-item">
+      <span className="term">{label}:</span>
+      <span>{item[field]}</span>
+    </li>
   );
 };
-
-const Message = () => {
-  return <p className="person-details__message">Select a person from a list</p>
-};
+export { Record };
