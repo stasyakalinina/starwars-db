@@ -1,56 +1,32 @@
-import React, {Component} from 'react';
-import Loader from '../loader/loader';
-import ErrorIndicator from '../error-indicator/error-indicator';
+import React from 'react';
+import {withData} from '../hoc-helpers/with-data';
+import SwapiService from '../../services/swapi-service';
 import './item-list.css';
 
-export default class ItemList extends Component {
+const ItemList = (props) => {
 
-  state = {
-    itemList: null,
-  };
+  const { data, onItemSelected } = props;
+  const renderLabel = props.children;
 
-  componentDidMount() {
-    const { getData } = this.props;
-
-    getData()
-      .then((items) => {
-        this.setState({
-          itemList: items,
-        });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }
-
-  renderItems(arr) {
-    return arr.map((item) => {
-
-      const label = this.props.children(item);
-      return (
-        <li
-          className="list-group-item"
-          key={item.id}
-          onClick={() => this.props.onItemSelected(item.id)}>
-          {label}
-        </li>
-      );
-    });
-  }
-
-  render() {
-    const { itemList } = this.state
-
-    if (!itemList) {
-      return <Loader />
-    }
-
-    let items = this.renderItems(itemList);
-
+  let items = data.map((item) => {
+    let label = renderLabel(item);
     return (
-      <ul className="item-list list-group">
-        {items}
-      </ul>
+      <li
+        className="list-group-item"
+        key={item.id}
+        onClick={() => onItemSelected(item.id)}>
+        {label}
+      </li>
     );
-  }
+  });
+
+  return (
+    <ul className="item-list list-group">
+      {items}
+    </ul>
+  );
 }
+
+const { getAllPeople } = new SwapiService();
+
+export default withData(ItemList, getAllPeople);
