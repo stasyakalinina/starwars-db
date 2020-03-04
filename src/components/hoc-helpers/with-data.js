@@ -7,7 +7,7 @@ const withData = (View, getData) => {
 
     state = {
       data: null,
-      error: true,
+      error: false,
     };
 
     componentDidMount() {

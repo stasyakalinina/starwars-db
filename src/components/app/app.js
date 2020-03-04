@@ -4,9 +4,10 @@ import SwapiService from '../../services/swapi-service';
 import Header from '../header/header';
 import RandomPlanet from '../random-planet/random-planet';
 import ErrorIndicator from '../error-indicator/error-indicator';
-import PeoplePage from '../people-page/people-page';
+import ErrorBoundry from '../error-boundry/error-boundry';
+import { PersonList, PlanetList, StarshipList } from '../sw-components/item-lists';
+import { PersonDetails, PlanetDetails, StarshipDetails } from '../sw-components/details';
 import ItemDetails, {Record} from '../item-details/item-details';
-import RowSection from '../row-section/row-section';
 
 export default class App extends Component {
 
@@ -52,12 +53,32 @@ export default class App extends Component {
     );
 
     return (
-      <div className="container">
-        <Header />
-        <RandomPlanet />
-        <PeoplePage />
-        <RowSection leftBlock={personDetails} rightBlock={starshipDetails} />
-      </div>
+      <ErrorBoundry>
+        <div className="container">
+          <Header />
+          {/* <RandomPlanet /> */}
+          {/* <PeoplePage /> */}
+          {/* <RowSection leftBlock={personDetails} rightBlock={starshipDetails} /> */}
+          <PersonDetails itemId={11} />
+
+          <PlanetDetails itemId={5} />
+
+          <StarshipDetails itemId={9} />
+
+          <PersonList>
+            { ({name}) => <span>{name}</span> }
+          </PersonList>
+
+          <PlanetList>
+            { ({name}) => <span>{name}</span> }
+          </PlanetList>
+
+          <StarshipList>
+            { ({name}) => <span>{name}</span> }
+          </StarshipList>
+
+        </div>
+      </ErrorBoundry>
     );
   };
 }

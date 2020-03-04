@@ -1,13 +1,10 @@
 import React, { Component } from 'react';
-import SwapiService from '../../services/swapi-service';
 import Loader from '../loader/loader';
 import ErrorButton from '../error-button/error-button';
 
 import './item-details.css';
 
 export default class ItemDetails extends Component {
-
-  swapiService = new SwapiService();
 
   state = {
     item: null,
@@ -45,20 +42,24 @@ export default class ItemDetails extends Component {
   };
 
   render() {
-    const { item, image } = this.state;
+    const { item, image, loading } = this.state;
+
     if (!item) {
       return <p>Select a item from a list</p>;
     }
 
+    const spinner = loading ? <Loader /> : null;
+
     return (
       <div className="person-details card">
+        {spinner}
         <img className="person-image"
         src={image} alt="avatar" />
         <div className="card__body">
           <h4>{item.name}</h4>
           <ul className="list-group list-group-flush">
             {
-              React.Children.map(this.props.children, (child, index) => {
+              React.Children.map(this.props.children, (child) => {
                 return React.cloneElement(child, { item });
               })
             }
@@ -71,7 +72,6 @@ export default class ItemDetails extends Component {
     );
   }
 }
-
 
 const Record = ({ item, field, label }) => {
   return (
