@@ -6,7 +6,9 @@ import RandomPlanet from '../random-planet/random-planet';
 import ErrorIndicator from '../error-indicator/error-indicator';
 import ErrorBoundry from '../error-boundry/error-boundry';
 import { PersonList, PlanetList, StarshipList } from '../sw-components/item-lists';
-import { PersonDetails, PlanetDetails, StarshipDetails } from '../sw-components/details';
+import PersonDetails from '../sw-components/person-details';
+import PlanetDetails from '../sw-components/planet-details';
+import StarshipDetails from '../sw-components/starship-details';
 import ItemDetails, {Record} from '../item-details/item-details';
 import { SwapiServiceProvider } from '../swapi-service-context/swapi-service-context';
 
