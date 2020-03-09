@@ -5,7 +5,6 @@ const ItemList = (props) => {
 
   const { data, onItemSelected } = props;
   const renderLabel = props.children;
-  console.log(data);
 
   let items = data.map((item) => {
     let label = renderLabel(item);

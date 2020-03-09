@@ -42,8 +42,19 @@
   color: #00bc8c;
 }
 
+.header .btn {
+  min-width: 110px;
+}
+
+@media(max-width: 767px) {
+  .header h1 {
+    font-size: 1.8rem;
+  }
+}
+
 @media(max-width: 640px) {
   .header {
+    flex-wrap: wrap;
     justify-content: space-between;
   }
 
@@ -62,4 +73,6 @@
     width: 100%;
     margin-bottom: 0.5rem;
   }
+
+
 }

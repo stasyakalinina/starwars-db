@@ -40,6 +40,4 @@ const withData = (View, getData) => {
   }
 };
 
-export {
-  withData
-};
+export default withData;

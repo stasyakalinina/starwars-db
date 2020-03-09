@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import SwapiService from '../../services/swapi-service';
-import {withData} from '../hoc-helpers/with-data';
+import withData from '../hoc-helpers/with-data';
 import ItemList from '../item-list/item-list';
 
 const swapiService = new SwapiService();
@@ -18,7 +18,7 @@ const withChildFunction = (Wrapped, fn) => {
 };
 
 const renderName = ({ name }) => <span>{name}</span>;
-const renderNameMolel = ({ name, model }) => <span>{name} ({model})</span>;
+const renderNameModel = ({ name, model }) => <span>{name} ({model})</span>;
 
 const PersonList = withData(
   withChildFunction(ItemList, renderName),
@@ -29,7 +29,7 @@ const PlanetList = withData(
   getAllPlanets);
 
 const StarshipList = withData(
-  withChildFunction(ItemList, renderNameMolel),
+  withChildFunction(ItemList, renderNameModel),
   getAllStarships);
 
 export {
