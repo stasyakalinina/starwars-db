@@ -55,7 +55,6 @@ const withData = (View) => {
         return <ErrorIndicator />
       }
 
-
       return <View {...this.props} data={data} />
     }
   }

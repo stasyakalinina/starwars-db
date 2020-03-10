@@ -45,34 +45,46 @@ export default class ItemDetails extends Component {
 
   render() {
     const { item, image, loading } = this.state;
-
-    if (!item) {
-      return <p>Select a item from a list</p>;
-    }
-
     const spinner = loading ? <Loader /> : null;
+    const showMessage = !item && !loading ? <Message/> : null;
+    const card = item && !loading ? <Card item={item} image={image} children={this.props.children} /> : null;
 
     return (
       <div className="person-details card">
+        {showMessage}
         {spinner}
-        <img className="person-image"
-        src={image} alt="avatar" />
-        <div className="card__body">
-          <h4>{item.name}</h4>
-          <ul className="list-group list-group-flush">
-            {
-              React.Children.map(this.props.children, (child) => {
-                return React.cloneElement(child, { item });
-              })
-            }
-          </ul>
-        </div>
-      <div className="card__btn">
-        <ErrorButton />
-      </div>
+        {card}
       </div>
     );
   }
+}
+
+const Card = (props) => {
+  const { item, image } = props;
+
+  return (
+    <React.Fragment>
+      <img className="person-image"
+        src={image} alt="avatar" />
+      <div className="card__body">
+        <h4>{item.name}</h4>
+        <ul className="list-group list-group-flush">
+          {
+            React.Children.map(props.children, (child) => {
+              return React.cloneElement(child, { item });
+            })
+          }
+        </ul>
+      </div>
+      <div className="card__btn">
+        <ErrorButton />
+      </div>
+    </React.Fragment>
+  )
+}
+
+const Message = () => {
+  return <p>Select a item from a list</p>;
 }
 
 const Record = ({ item, field, label }) => {
