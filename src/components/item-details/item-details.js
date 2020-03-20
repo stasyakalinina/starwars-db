@@ -50,7 +50,7 @@ export default class ItemDetails extends Component {
     const card = item && !loading ? <Card item={item} image={image} children={this.props.children} /> : null;
 
     return (
-      <div className="person-details card">
+      <div className="item-details card">
         {showMessage}
         {spinner}
         {card}
@@ -64,7 +64,7 @@ const Card = (props) => {
 
   return (
     <React.Fragment>
-      <img className="person-image"
+      <img className="item-image"
         src={image} alt="avatar" />
       <div className="card__body">
         <h4>{item.name}</h4>
