@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import SwapiService from '../../services/swapi-service';
 import MockSwapiService from '../../services/mock-swapi-service';
 import Header from '../header/header';
@@ -42,16 +43,18 @@ export default class App extends Component {
     return (
       <ErrorBoundry>
         <SwapiServiceProvider value={this.state.swapiService}>
-          <div className="container">
-            <Header onServiceChange={this.onServiceChange} />
+          <Router>
+            <div className="container">
+              <Header onServiceChange={this.onServiceChange} />
+              <RandomPlanet />
 
-            <RandomPlanet />
+              <Route path='/' exact={true} render={() => <h2 className="app-title">Welcome to StarDB</h2>} />
+              <Route path='/people' component={PeoplePage} />
+              <Route path='/planets' component={PlanetsPage} />
+              <Route path='/starships' component={StarshipsPage } />
 
-            <PeoplePage />
-            <PlanetsPage />
-            <StarshipsPage />
-
-          </div>
+            </div>
+            </Router>
         </SwapiServiceProvider>
       </ErrorBoundry>
     );
