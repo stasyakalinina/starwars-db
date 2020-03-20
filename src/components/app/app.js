@@ -10,6 +10,7 @@ import ErrorBoundry from '../error-boundry/error-boundry';
 import { SwapiServiceProvider } from '../swapi-service-context/swapi-service-context';
 
 import './app.css'
+import { StarshipDetails } from '../sw-components';
 
 export default class App extends Component {
 
@@ -51,7 +52,12 @@ export default class App extends Component {
               <Route path='/' exact={true} render={() => <h2 className="app-title">Welcome to StarDB</h2>} />
               <Route path='/people' component={PeoplePage} />
               <Route path='/planets' component={PlanetsPage} />
-              <Route path='/starships' component={StarshipsPage } />
+              <Route path='/starships' exact component={StarshipsPage } />
+              <Route path='/starships/:id' render={(props) => {
+                console.log(props);
+                let { id } = props.match.params;
+                return <StarshipDetails itemId={id}/>
+              }} />
 
             </div>
             </Router>
