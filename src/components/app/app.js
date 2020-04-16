@@ -43,9 +43,7 @@ export default class App extends Component {
   }
 
   render() {
-
     const { isLoggedIn } = this.state;
-    console.log(isLoggedIn);
 
     if(this.state.hasError) {
       return <ErrorIndicator />
